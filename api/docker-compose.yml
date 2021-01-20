@@ -1,0 +1,20 @@
+version: "3"
+services: 
+    gazad:
+        container_name: "gazad"
+        image: aas_php80_fpm_apache24
+        # build:
+        #     context: .docker/
+        #     dockerfile: Dockerfile
+        volumes:
+            - ./:/var/www/app
+            - ./.docker/app.conf:/etc/apache2/sites-available/000-default.conf:ro
+        # command: /start.sh
+        ports: 
+            - 8091:80
+        # user: user
+        working_dir: /var/www/app
+networks:
+    default:
+        external:
+            name: nginx-proxy
